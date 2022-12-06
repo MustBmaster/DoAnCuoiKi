@@ -21,7 +21,7 @@ const TopChartCard = ({
   handlePlayClick,
 }) => (
   <div
-    className={`w-full flex flex-row items-center hover:bg-[#4c426e] ${
+    className={`w-full flex flex-row items-center bg-[rgb(30,30,30)] hover:bg-[#1ED760] ${
       activeSong?.title === song?.title ? "bg-[#4c426e]" : "bg-transparent"
     } py-2 p-4 rounded-lg cursor-pointer mb-2`}
   >
@@ -94,7 +94,9 @@ const TopPlay = () => {
         <div className="flex flex-row justify-between items-center">
           <h2 className="text-white font-bold text-2xl">Top Charts</h2>
           <Link to="/top-charts">
-            <p className="text-gray-300 text-base cursor-pointer">See more</p>
+            <p className="text-gray-300 text-base cursor-pointer hover:underline">
+              See more
+            </p>
           </Link>
         </div>
 
@@ -113,11 +115,13 @@ const TopPlay = () => {
         </div>
       </div>
 
-      <div className="w-full flex flex-col mt-8">
+      <div className="w-full flex flex-col">
         <div className="flex flex-row justify-between items-center">
           <h2 className="text-white font-bold text-2xl">Top Artists</h2>
           <Link to="/top-artists">
-            <p className="text-gray-300 text-base cursor-pointer">See more</p>
+            <p className="text-gray-300 text-base cursor-pointer hover:underline">
+              See more
+            </p>
           </Link>
         </div>
 

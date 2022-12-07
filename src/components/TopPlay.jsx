@@ -22,7 +22,7 @@ const TopChartCard = ({
 }) => (
   <div
     className={`w-full flex flex-row items-center bg-[rgb(30,30,30)] hover:bg-[#1ED760] ${
-      activeSong?.title === song?.title ? "bg-[#4c426e]" : "bg-transparent"
+      activeSong?.title === song?.title ? "bg-[#1ED760]" : "bg-transparent"
     } py-2 p-4 rounded-lg cursor-pointer mb-2`}
   >
     <h3 className="font-bold text-base text-white mr-3">{i + 1}.</h3>

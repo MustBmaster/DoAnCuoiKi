@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import ArtistImg from "../assets/artistImg.png";
 
 const ArtistCard = ({ artist }) => {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ const ArtistCard = ({ artist }) => {
     >
       <img
         alt="song_img"
-        src={artist?.images?.background}
+        src={artist?.images ? artist?.images?.background : ArtistImg}
         className="w-full h-56 rounded-full"
       />
       <p className="mt-4 font-semibold text-lg text-white truncate">

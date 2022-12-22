@@ -35,6 +35,7 @@ const SongDetails = () => {
     dispatch(setActiveSong({ song, data, i }));
     dispatch(playPause(true));
   };
+  console.log(data)
   // console.log(artistId, songData);
   return (
     <div className="flex flex-col">

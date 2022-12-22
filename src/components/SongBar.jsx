@@ -14,7 +14,7 @@ const SongBar = ({
   handlePlayClick,
 }) => (
   <div
-    className={`w-full flex flex-row items-center hover:bg-[#1ED760] ${
+    className={`w-full flex flex-row items-center bg-[#121212] hover:bg-[#1ED760] ${
       activeSong?.title === song?.title ? "bg-[#1ED760]" : "bg-[#1E1E1E]"
     } py-2 p-4 rounded-lg cursor-pointer mb-2`}
   >

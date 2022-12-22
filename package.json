@@ -9,7 +9,10 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
+    "antd": "^5.0.7",
     "axios": "^0.27.2",
+    "bootstrap": "^5.2.3",
+    "flowbite": "^1.5.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",

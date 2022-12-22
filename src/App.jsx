@@ -10,6 +10,10 @@ import {
   Search,
   SongDetails,
   TopCharts,
+  Login,
+  UserProfile,
+  UserHistory,
+  SignUp,
 } from "./pages";
 
 const App = () => {
@@ -31,9 +35,13 @@ const App = () => {
               <Route path="/artists/:id" element={<ArtistDetails />} />
               <Route path="/songs/:songid" element={<SongDetails />} />
               <Route path="/search/:searchTerm" element={<Search />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/userprofile" element={<UserProfile />} />
+              <Route path="/userhistory" element={<UserHistory />} />
+              <Route path="/signup" element={<SignUp />} />
             </Routes>
           </div>
-          <div className="xl:sticky relative top-0 h-fit overflow-y-scroll hide-scrollbar ">
+          <div className="xl:sticky relative top-0 h-fit">
             <TopPlay />
           </div>
         </div>

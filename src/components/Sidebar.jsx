@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { Button, Dropdown, message, Space, Tooltip } from "antd";
 import {
   HiOutlineHashtag,
   HiOutlineHome,
@@ -7,7 +8,9 @@ import {
   HiOutlinePhotograph,
   HiOutlineUserGroup,
 } from "react-icons/hi";
-import { RiCloseLine } from "react-icons/ri";
+import { FaHistory, FaUserCircle } from "react-icons/fa";
+import { IoMdLogIn } from "react-icons/io";
+import { RiCloseLine, RiLogoutCircleLine } from "react-icons/ri";
 
 import { logo } from "../assets";
 import Logo from "../assets/SpotifyLogoGreen.png";
@@ -18,7 +21,50 @@ const links = [
   { name: "Top Artists", to: "/top-artists", icon: HiOutlineUserGroup },
   { name: "Top Charts", to: "/top-charts", icon: HiOutlineHashtag },
 ];
-
+const items = [
+  {
+    label: (
+      <NavLink
+        key="Login"
+        to="/userhistory"
+        className="flex flex-row justify-start items-center text-sm font-medium text-black"
+      >
+        <FaHistory className="w-6 h-6 mr-2" />
+        History
+      </NavLink>
+    ),
+    key: "1",
+  },
+  {
+    label: (
+      <NavLink
+        key="Profile"
+        to="/userprofile"
+        className="flex flex-row justify-start items-center text-sm font-medium text-black"
+      >
+        <FaUserCircle className="w-6 h-6 mr-2" />
+        Profile
+      </NavLink>
+    ),
+    key: "2",
+  },
+  {
+    type: "divider",
+  },
+  {
+    label: (
+      <NavLink
+        key="Login"
+        to="/login"
+        className="flex flex-row justify-start items-center text-sm font-medium text-black"
+      >
+        <RiLogoutCircleLine className="w-6 h-6 mr-2" />
+        LogOut
+      </NavLink>
+    ),
+    key: "3",
+  },
+];
 const NavLinks = ({ handleClick }) => (
   <div className="mt-10">
     {links.map((item) => (
@@ -43,6 +89,26 @@ const Sidebar = () => {
       <div className="bg-[#000000] md:flex hidden flex-col w-[240px] py-10 px-4 ">
         <img src={Logo} alt="logo" className="w-full h-14 object-contain" />
         <NavLinks />
+        {/* <NavLink
+          key="Login"
+          to="/login"
+          className="flex flex-row justify-start items-center my-8 text-sm font-medium text-gray-400 hover:text-white"
+        >
+          <IoMdLogIn className="w-6 h-6 mr-2" />
+          Login
+        </NavLink> */}
+        <Dropdown
+          menu={{
+            items,
+          }}
+          placement="bottomLeft"
+          arrow
+          className="bg-green-500"
+        >
+          <Button className="text-green-500 hover:text-green-500" size="large">
+            UserName
+          </Button>
+        </Dropdown>
       </div>
 
       {/* Mobile sidebar */}

@@ -73,9 +73,10 @@ const TopPlay = () => {
   useEffect(() => {
     divRef.current.scrollIntoView({ behavior: "smooth" });
   });
-
-  const topPlays = data?.slice(0, 5);
-
+  // cho đến khi hết trả về kiểu dữ liệu lỗi
+  // const topPlays = data?.slice(0, 5);
+  const data2 = data;
+  const topPlays = data?.slice(0, 3).concat(data2.slice(5, 7));
   const handlePauseClick = () => {
     dispatch(playPause(false));
   };

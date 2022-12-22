@@ -10,6 +10,10 @@ const Login = () => {
   };
   return (
     <div className="pt-8 text-white">
+      <h2 className="font-bold text-3xl text-white text-left">
+        Welcome to Minh's Spotify
+      </h2>
+      <br />
       <Form
         theme="dark"
         name="basic"
@@ -62,7 +66,16 @@ const Login = () => {
             span: 14,
           }}
         >
-          <Checkbox>Remember me</Checkbox>
+          <div className="flex-row justify-between">
+            <Checkbox>Remember me</Checkbox>
+            <NavLink
+              key="ForgetPassword"
+              to="/forgetpassword"
+              className="items-center text-sm font-medium text-white px-10 hover:underline"
+            >
+              Forget password
+            </NavLink>
+          </div>
         </Form.Item>
 
         <Form.Item

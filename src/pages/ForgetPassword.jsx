@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Checkbox, Form, Input } from "antd";
-const SignUp = () => {
+const ForgetPassword = () => {
   const onFinish = (values) => {
     console.log("Success:", values);
   };
@@ -10,7 +10,7 @@ const SignUp = () => {
   return (
     <div className="pt-8 text-white">
       <h2 className="font-bold text-3xl text-white text-left">
-        Welcome to Minh's Spotify
+        Forget Password
       </h2>
       <br />
       <Form
@@ -60,45 +60,6 @@ const SignUp = () => {
         </Form.Item>
 
         <Form.Item
-          className="text-white"
-          label="Password"
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: "Please input your password!",
-            },
-          ]}
-        >
-          <Input.Password />
-        </Form.Item>
-
-        <Form.Item
-          name="confirm"
-          label="Confirm Password"
-          dependencies={["password"]}
-          hasFeedback
-          rules={[
-            {
-              required: true,
-              message: "Please confirm your password!",
-            },
-            ({ getFieldValue }) => ({
-              validator(_, value) {
-                if (!value || getFieldValue("password") === value) {
-                  return Promise.resolve();
-                }
-                return Promise.reject(
-                  new Error("The two passwords that you entered do not match!")
-                );
-              },
-            }),
-          ]}
-        >
-          <Input.Password />
-        </Form.Item>
-
-        <Form.Item
           wrapperCol={{
             offset: 8,
             span: 16,
@@ -109,11 +70,11 @@ const SignUp = () => {
             htmlType="submit"
             size="large"
           >
-            Sign Up
+            Reset password
           </Button>
         </Form.Item>
       </Form>
     </div>
   );
 };
-export default SignUp;
+export default ForgetPassword;

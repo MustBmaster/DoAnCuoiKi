@@ -102,14 +102,14 @@ const Sidebar = () => {
       <div className="bg-[#000000] md:flex hidden flex-col w-[240px] py-10 px-4 ">
         <img src={Logo} alt="logo" className="w-full h-14 object-contain" />
         <NavLinks />
-        {/* <NavLink
+        <NavLink
           key="Login"
           to="/login"
           className="flex flex-row justify-start items-center my-8 text-sm font-medium text-gray-400 hover:text-white"
         >
           <IoMdLogIn className="w-6 h-6 mr-2" />
           Login
-        </NavLink> */}
+        </NavLink>
         <Dropdown
           menu={{
             items,
@@ -146,6 +146,26 @@ const Sidebar = () => {
       >
         <img src={Logo} alt="logo" className="w-full h-14 object-contain" />
         <NavLinks handleClick={() => setMobileMenuOpen(false)} />
+        <NavLink
+          key="Login"
+          to="/login"
+          className="flex flex-row justify-start items-center my-8 text-sm font-medium text-gray-400 hover:text-white"
+        >
+          <IoMdLogIn className="w-6 h-6 mr-2" />
+          Login
+        </NavLink>
+        <Dropdown
+          menu={{
+            items,
+          }}
+          placement="bottomLeft"
+          arrow
+          className="bg-green-500"
+        >
+          <Button className="text-green-500 hover:text-green-500" size="large">
+            UserName
+          </Button>
+        </Dropdown>
       </div>
     </>
   );

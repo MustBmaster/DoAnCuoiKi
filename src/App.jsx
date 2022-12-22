@@ -14,6 +14,8 @@ import {
   UserProfile,
   UserHistory,
   SignUp,
+  Favorite,
+  ForgetPassword,
 } from "./pages";
 
 const App = () => {
@@ -39,6 +41,8 @@ const App = () => {
               <Route path="/userprofile" element={<UserProfile />} />
               <Route path="/userhistory" element={<UserHistory />} />
               <Route path="/signup" element={<SignUp />} />
+              <Route path="/favorite" element={<Favorite />} />
+              <Route path="/forgetpassword" element={<ForgetPassword />} />
             </Routes>
           </div>
           <div className="xl:sticky relative top-0 h-fit">

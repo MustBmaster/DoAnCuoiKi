@@ -48,3 +48,16 @@
 span {
   color: white;
 }
+.ant-pagination-item {
+  background-color: white !important;
+}
+.ant-pagination-item-active {
+  background-color: #1ed760 !important;
+}
+
+.ant-pagination-item-link {
+  background-color: white !important;
+}
+.ant-select-selection-item{
+  color: black;
+}

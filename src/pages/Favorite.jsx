@@ -25,10 +25,10 @@ for (let i = 0; i < 100; i++) {
     address: `London, Park Lane no. ${i}`,
   });
 }
-const UserHistory = () => {
+const Favorite = () => {
   return (
     <div>
-      <h2 className="font-bold text-3xl text-white text-left">History</h2>
+      <h2 className="font-bold text-3xl text-white text-left">Favorite</h2>
       <br />
       <Table
         columns={columns}
@@ -44,4 +44,4 @@ const UserHistory = () => {
   );
 };
 
-export default UserHistory;
+export default Favorite;

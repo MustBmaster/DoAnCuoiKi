@@ -9,6 +9,8 @@ const UserProfile = () => {
   };
   return (
     <div className="pt-8 text-white">
+      <h2 className="font-bold text-3xl text-white text-left">User Profile</h2>
+      <br />
       <Form
         name="basic"
         labelCol={{

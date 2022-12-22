@@ -8,7 +8,7 @@ import {
   HiOutlinePhotograph,
   HiOutlineUserGroup,
 } from "react-icons/hi";
-import { FaHistory, FaUserCircle } from "react-icons/fa";
+import { FaHistory, FaUserCircle, FaHeart } from "react-icons/fa";
 import { IoMdLogIn } from "react-icons/io";
 import { RiCloseLine, RiLogoutCircleLine } from "react-icons/ri";
 
@@ -49,6 +49,19 @@ const items = [
     key: "2",
   },
   {
+    label: (
+      <NavLink
+        key="Favorite"
+        to="/favorite"
+        className="flex flex-row justify-start items-center text-sm font-medium text-black"
+      >
+        <FaHeart className="w-6 h-6 mr-2" />
+        Favorite song
+      </NavLink>
+    ),
+    key: "3",
+  },
+  {
     type: "divider",
   },
   {
@@ -62,7 +75,7 @@ const items = [
         LogOut
       </NavLink>
     ),
-    key: "3",
+    key: "4",
   },
 ];
 const NavLinks = ({ handleClick }) => (

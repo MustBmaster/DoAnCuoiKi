@@ -12,7 +12,7 @@ export const coreApi = createApi({
     prepareHeaders: (headers) => {
       headers.set(
         "X-RapidAPI-Key",
-        "b9c8b355a2msh5657fff088d9527p1d7fbfjsn71177c47a7e7"
+        "05aa4199a1msh64daaf176e42081p10b23ajsnfbf0ed5acaa6"
       );
       return headers;
     },

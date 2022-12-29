@@ -10,8 +10,10 @@ const RelatedSongs = ({
   handlePauseClick,
   handlePlayClick,
 }) => {
-  const songs = data["top-songs"] ? data["top-songs"].data : data;
-  // console.log(songs);
+  console.log(data);
+  // const songs = data["top-songs"] ? data["top-songs"].data : data;
+  const songs = data;
+
   return (
     <div className="flex flex-col">
       <h1 className="font-bold text-3xl text-white">Related Songs:</h1>

@@ -1,13 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Checkbox, Form, Input, message } from "antd";
+import { setUser } from "../redux/features/userSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  // const [messageApi, contextHolder] = message.useMessage();
   const onFinish = (values) => {
-    console.log("Success:", values);
+    const user = {};
+    user.user_name = values.username;
+    user.password = values.password;
+    axios
+      .post("http://localhost:9000/api/account/login", user)
+      .then(function (response) {
+        console.log(response);
+        if (response.data.StatusCode == 200) {
+          message.success("Login successful", 5);
+          dispatch(setUser(response.data.Data.UserInfo));
+          navigate(`/discover`);
+        } else {
+          message.error("Login failed, check your username or password", 5);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+        message.error("Error", 5);
+      });
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
   return (
     <div className="pt-8 text-white">
       <h2 className="font-bold text-3xl text-white text-left">

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Button, Dropdown, message, Space, Tooltip } from "antd";
+import { setUser } from "../redux/features/userSlice";
 import {
   HiOutlineHashtag,
   HiOutlineHome,
@@ -11,10 +12,12 @@ import {
 import { FaHistory, FaUserCircle, FaHeart } from "react-icons/fa";
 import { IoMdLogIn } from "react-icons/io";
 import { RiCloseLine, RiLogoutCircleLine } from "react-icons/ri";
-
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { logo } from "../assets";
 import Logo from "../assets/SpotifyLogoGreen.png";
 
+// console.log(userInfo);
 const links = [
   { name: "Discover", to: "/discover", icon: HiOutlineHome },
   { name: "Around You", to: "/around-you", icon: HiOutlinePhotograph },
@@ -61,22 +64,6 @@ const items = [
     ),
     key: "3",
   },
-  {
-    type: "divider",
-  },
-  {
-    label: (
-      <NavLink
-        key="Login"
-        to="/login"
-        className="flex flex-row justify-start items-center text-sm font-medium text-black"
-      >
-        <RiLogoutCircleLine className="w-6 h-6 mr-2" />
-        LogOut
-      </NavLink>
-    ),
-    key: "4",
-  },
 ];
 const NavLinks = ({ handleClick }) => (
   <div className="mt-10">
@@ -96,32 +83,54 @@ const NavLinks = ({ handleClick }) => (
 
 const Sidebar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
+  const { userInfo } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const onClick = () => {
+    dispatch(setUser(null));
+    navigate(`/login`);
+  };
+  console.log(userInfo);
   return (
     <>
       <div className="bg-[#000000] md:flex hidden flex-col w-[240px] py-10 px-4 ">
         <img src={Logo} alt="logo" className="w-full h-14 object-contain" />
         <NavLinks />
-        <NavLink
-          key="Login"
-          to="/login"
-          className="flex flex-row justify-start items-center my-8 text-sm font-medium text-gray-400 hover:text-white"
-        >
-          <IoMdLogIn className="w-6 h-6 mr-2" />
-          Login
-        </NavLink>
-        <Dropdown
-          menu={{
-            items,
-          }}
-          placement="bottomLeft"
-          arrow
-          className="bg-green-500"
-        >
-          <Button className="text-green-500 hover:text-green-500" size="large">
-            UserName
-          </Button>
-        </Dropdown>
+        {userInfo ? (
+          <div>
+            <div
+              className="flex flex-row justify-start items-center text-sm font-medium text-gray-400 hover:text-green-500 my-8 cursor-pointer"
+              onClick={onClick}
+            >
+              <RiLogoutCircleLine className="w-6 h-6 mr-2" />
+              <div>Log-Out</div>
+            </div>
+            <Dropdown
+              menu={{
+                items,
+              }}
+              placement="bottomLeft"
+              arrow
+              className="bg-green-500"
+            >
+              <Button
+                className="text-green-500 hover:text-green-500"
+                size="large"
+              >
+                {userInfo.user_name}
+              </Button>
+            </Dropdown>
+          </div>
+        ) : (
+          <NavLink
+            key="Login"
+            to="/login"
+            className="flex flex-row justify-start items-center my-8 text-sm font-medium text-gray-400 hover:text-white"
+          >
+            <IoMdLogIn className="w-6 h-6 mr-2" />
+            Login
+          </NavLink>
+        )}
       </div>
 
       {/* Mobile sidebar */}
@@ -146,26 +155,41 @@ const Sidebar = () => {
       >
         <img src={Logo} alt="logo" className="w-full h-14 object-contain" />
         <NavLinks handleClick={() => setMobileMenuOpen(false)} />
-        <NavLink
-          key="Login"
-          to="/login"
-          className="flex flex-row justify-start items-center my-8 text-sm font-medium text-gray-400 hover:text-white"
-        >
-          <IoMdLogIn className="w-6 h-6 mr-2" />
-          Login
-        </NavLink>
-        <Dropdown
-          menu={{
-            items,
-          }}
-          placement="bottomLeft"
-          arrow
-          className="bg-green-500"
-        >
-          <Button className="text-green-500 hover:text-green-500" size="large">
-            UserName
-          </Button>
-        </Dropdown>
+        {userInfo ? (
+          <div>
+            <div
+              className="flex flex-row justify-start items-center text-sm font-medium text-gray-400 hover:text-green-500 pb-4"
+              onClick={onClick}
+            >
+              <RiLogoutCircleLine className="w-6 h-6 mr-2" />
+              <div>Log-Out</div>
+            </div>
+            <Dropdown
+              menu={{
+                items,
+              }}
+              placement="bottomLeft"
+              arrow
+              className="bg-green-500"
+            >
+              <Button
+                className="text-green-500 hover:text-green-500"
+                size="large"
+              >
+                {userInfo.user_name}
+              </Button>
+            </Dropdown>
+          </div>
+        ) : (
+          <NavLink
+            key="Login"
+            to="/login"
+            className="flex flex-row justify-start items-center my-8 text-sm font-medium text-gray-400 hover:text-white"
+          >
+            <IoMdLogIn className="w-6 h-6 mr-2" />
+            Login
+          </NavLink>
+        )}
       </div>
     </>
   );

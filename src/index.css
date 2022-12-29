@@ -58,6 +58,21 @@ span {
 .ant-pagination-item-link {
   background-color: white !important;
 }
-.ant-select-selection-item{
+.ant-select-selection-item {
   color: black;
+}
+.ant-message-success > span {
+  color: #1ed760 !important;
+}
+.ant-message-error > span {
+  color: red !important;
+}
+.ant-picker-header > button > span {
+  color: #1ed760 !important;
+}
+.ant-form-item-label > label {
+  color: white !important;
+}
+.ant-form-item-tooltip{
+  color: white !important;
 }

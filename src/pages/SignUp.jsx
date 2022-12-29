@@ -1,8 +1,59 @@
 import React from "react";
-import { Button, Checkbox, Form, Input } from "antd";
+import {
+  Button,
+  Checkbox,
+  Form,
+  Input,
+  Select,
+  DatePicker,
+  message,
+} from "antd";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 const SignUp = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = {
+    user_name: null,
+    password: null,
+    full_name: null,
+    dob: null,
+    email: null,
+    address: "HA NOI",
+    gender: 1,
+    admin: false,
+    active: true,
+    image:
+      "https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=",
+    role_code: "01",
+    created_at: null,
+    updated_at: null,
+    deleted_at: null,
+  };
   const onFinish = (values) => {
-    console.log("Success:", values);
+    user.user_name = values.username;
+    user.password = values.password;
+    user.full_name = values.fullname;
+    user.email = values.email;
+    user.gender = values.gender;
+    user.dob = values.dob.format("YYYY-MM-D");
+    console.log(user);
+    axios
+      .post("http://localhost:9000/api/account/register", user)
+      .then(function (response) {
+        console.log(response);
+        if (response.data.StatusCode == 200) {
+          message.success("Register successful", 5);
+          navigate(`/login`);
+        } else {
+          message.error("Register failed", 5);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+        message.error("Error", 5);
+      });
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -32,6 +83,7 @@ const SignUp = () => {
           className="text-white"
           label="Username"
           name="username"
+          tooltip="What do you want others to call you?"
           rules={[
             {
               required: true,
@@ -98,6 +150,43 @@ const SignUp = () => {
           <Input.Password />
         </Form.Item>
 
+        <Form.Item
+          className="text-white"
+          label="Full name"
+          name="fullname"
+          rules={[
+            {
+              required: true,
+              message: "Please input your Fullname!",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          className="text-white"
+          label="Birth"
+          name="dob"
+          rules={[
+            {
+              required: true,
+              message: "Please input your date of birth",
+            },
+          ]}
+        >
+          <DatePicker style={{ width: "100%" }} />
+        </Form.Item>
+        <Form.Item
+          name="gender"
+          label="Gender"
+          rules={[{ required: true, message: "Please select gender!" }]}
+        >
+          <Select placeholder="select your gender">
+            <Option value="1">Male</Option>
+            <Option value="2">Female</Option>
+            <Option value="3">Other</Option>
+          </Select>
+        </Form.Item>
         <Form.Item
           wrapperCol={{
             offset: 8,

@@ -27,13 +27,13 @@ const ArtistDetails = () => {
 
   if (error) return <Error />;
 
-  // console.log(Object.values(artistData.data[0].views))
+  // console.log(Object.values(artistData.data[0].views["top-songs"].data));
   return (
     <div className="flex flex-col">
       <DetailsHeader artistId={artistId} artistData={artistData} />
 
       <RelatedSongs
-        data={(artistData?.data[0].views)}
+        data={artistData?.data[0].views["top-songs"].data}
         artistId={artistId}
         isPlaying={isPlaying}
         activeSong={activeSong}

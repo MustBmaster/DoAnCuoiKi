@@ -7,6 +7,9 @@ import { playPause, setActiveSong } from "../redux/features/playerSlice";
 import defaultImg from "../assets/musicImg.jpg";
 
 const SongCard = ({ song, isPlaying, activeSong, data, i }) => {
+  // console.log("song", song);
+  // console.log("activeSong", activeSong);
+  // console.log("data", data);
   const dispatch = useDispatch();
   // click play/pause sẽ dispatch action thay state trong store của slice player
   const handlePauseClick = () => {
@@ -15,10 +18,10 @@ const SongCard = ({ song, isPlaying, activeSong, data, i }) => {
   const handlePlayClick = () => {
     dispatch(setActiveSong({ song, data, i }));
     dispatch(playPause(true));
-    console.log(song.subtitle);
+    // console.log(song.subtitle);
   };
   // console.log(activeSong);
-  // console.log(song);
+  console.log(song);
 
   return (
     <div className="flex flex-col w-[250px] p-4 bg-white/5 bg-opacity-80 backdrop-blur-sm animate-slideup rounded-lg cursor-pointer ">

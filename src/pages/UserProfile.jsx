@@ -34,13 +34,13 @@ const UserProfile = () => {
     };
     console.log(payload);
     axios
-      .post("http://localhost:9000/api/account/" + userInfo._id, payload)
+      .put("http://localhost:9000/api/account/" + userInfo._id, payload)
       .then(function (response) {
         console.log(response);
         if (response.data.StatusCode == 200) {
           message.success("Infomation updated", 5);
         } else {
-          message.error("Register failed", 5);
+          message.error("Something wrong", 5);
         }
       })
       .catch(function (error) {
@@ -91,45 +91,6 @@ const UserProfile = () => {
             style={{ background: "white", color: "black" }}
           />
         </Form.Item>
-
-        {/* <Form.Item
-          className="text-white"
-          label="Password"
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: "Please input your password!",
-            },
-          ]}
-        >
-          <Input.Password />
-        </Form.Item> */}
-
-        {/* <Form.Item
-          name="confirm"
-          label="Confirm Password"
-          dependencies={["password"]}
-          hasFeedback
-          rules={[
-            {
-              required: true,
-              message: "Please confirm your password!",
-            },
-            ({ getFieldValue }) => ({
-              validator(_, value) {
-                if (!value || getFieldValue("password") === value) {
-                  return Promise.resolve();
-                }
-                return Promise.reject(
-                  new Error("The two passwords that you entered do not match!")
-                );
-              },
-            }),
-          ]}
-        >
-          <Input.Password />
-        </Form.Item> */}
 
         <Form.Item
           className="text-white"

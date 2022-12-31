@@ -74,9 +74,9 @@ const TopPlay = () => {
     divRef.current.scrollIntoView({ behavior: "smooth" });
   });
   // cho đến khi hết trả về kiểu dữ liệu lỗi
-  // const topPlays = data?.slice(0, 5);
+  const topPlays = data?.slice(0, 5);
   const data2 = data;
-  const topPlays = data?.slice(0, 3).concat(data2.slice(5, 7));
+  // const topPlays = data?.slice(0, 3).concat(data2.slice(5, 7));
   const handlePauseClick = () => {
     dispatch(playPause(false));
   };
@@ -85,7 +85,7 @@ const TopPlay = () => {
     dispatch(setActiveSong({ song, data, i }));
     dispatch(playPause(true));
   };
-
+  console.log(data);
   return (
     <div
       ref={divRef}

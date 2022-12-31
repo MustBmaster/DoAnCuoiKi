@@ -96,7 +96,7 @@ const Sidebar = () => {
       <div className="bg-[#000000] md:flex hidden flex-col w-[240px] py-10 px-4 ">
         <img src={Logo} alt="logo" className="w-full h-14 object-contain" />
         <NavLinks />
-        {userInfo ? (
+        {userInfo != null ? (
           <div>
             <div
               className="flex flex-row justify-start items-center text-sm font-medium text-gray-400 hover:text-green-500 my-8 cursor-pointer"
@@ -117,7 +117,7 @@ const Sidebar = () => {
                 className="text-green-500 hover:text-green-500"
                 size="large"
               >
-                {userInfo.user_name}
+                {userInfo.full_name}
               </Button>
             </Dropdown>
           </div>

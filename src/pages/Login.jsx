@@ -13,6 +13,7 @@ const Login = () => {
     const user = {};
     user.user_name = values.username;
     user.password = values.password;
+    console.log(user);
     axios
       .post("http://localhost:9000/api/account/login", user)
       .then(function (response) {

@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import PlayPause from "./PlayPause";
 import { playPause, setActiveSong } from "../redux/features/playerSlice";
 import defaultImg from "../assets/musicImg.jpg";
+import axios from "axios";
 
 const SongCard = ({ song, isPlaying, activeSong, data, i }) => {
   // console.log("song", song);
@@ -18,10 +19,28 @@ const SongCard = ({ song, isPlaying, activeSong, data, i }) => {
   const handlePlayClick = () => {
     dispatch(setActiveSong({ song, data, i }));
     dispatch(playPause(true));
-    // console.log(song.subtitle);
+    // const UID = localStorage.getItem("UID");
+    // console.log("UID: ", UID);
+    // if (UID) {
+    //   const listened = {
+    //     key: song.key,
+    //     name: song.title,
+    //     artist: song.subtitle,
+    //     image: song.images?.coverart,
+    //     last_listen: new Date(),
+    //     user_id: UID,
+    //   };
+    //   console.log("listened", listened);
+    //   axios
+    //     .post("http://localhost:9000/api/history", listened)
+    //     .then(function (response) {
+    //       console.log(response);
+    //     })
+    //     .catch(function (error) {
+    //       console.log(error);
+    //     });
+    // }
   };
-  // console.log(activeSong);
-  // console.log(song);
 
   return (
     <div className="flex flex-col w-[250px] p-4 bg-white/5 bg-opacity-80 backdrop-blur-sm animate-slideup rounded-lg cursor-pointer ">

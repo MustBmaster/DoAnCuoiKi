@@ -73,6 +73,9 @@ span {
 .ant-form-item-label > label {
   color: white !important;
 }
-.ant-form-item-tooltip{
+.ant-form-item-tooltip {
   color: white !important;
+}
+.anticon-close {
+  color: #1ed760;
 }

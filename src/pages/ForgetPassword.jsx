@@ -1,8 +1,34 @@
 import React from "react";
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Form, Input, notification, message } from "antd";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+notification.config({
+  maxCount: 1,
+  // placement,
+});
+
 const ForgetPassword = () => {
+  const navigate = useNavigate();
   const onFinish = (values) => {
     console.log("Success:", values);
+    axios
+      .post("http://localhost:9000/api/email/find-password", values)
+      .then(function (response) {
+        console.log(response.data.Data);
+        if (response.data.StatusCode == 200) {
+          notification.open({
+            message: response.data.Data.subject,
+            description: response.data.Data.html,
+            duration: 0,
+          });
+          navigate("/login");
+        } else {
+          message.error("Something wrong", 5);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -28,20 +54,6 @@ const ForgetPassword = () => {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <Form.Item
-          className="text-white"
-          label="Username"
-          name="username"
-          rules={[
-            {
-              required: true,
-              message: "Please input your username!",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-
         <Form.Item
           name="email"
           label="E-mail"

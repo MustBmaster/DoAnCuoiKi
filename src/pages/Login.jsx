@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Button, Checkbox, Form, Input, message } from "antd";
-import { setUser } from "../redux/features/userSlice";
+import { setUser, setUserID } from "../redux/features/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -13,14 +13,15 @@ const Login = () => {
     const user = {};
     user.user_name = values.username;
     user.password = values.password;
-    console.log(user);
+    // console.log(user);
     axios
       .post("http://localhost:9000/api/account/login", user)
       .then(function (response) {
-        console.log(response);
+        // console.log(response);
         if (response.data.StatusCode == 200) {
           message.success("Login successful", 5);
           dispatch(setUser(response.data.Data.UserInfo));
+          dispatch(setUserID(response.data.Data.UserInfo._id));
           navigate(`/discover`);
         } else {
           message.error("Login failed, check your username or password", 5);

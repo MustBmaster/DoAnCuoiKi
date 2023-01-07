@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Button, Dropdown, message, Space, Tooltip } from "antd";
-import { setUser } from "../redux/features/userSlice";
+import { setUser, setUserID } from "../redux/features/userSlice";
 import {
   HiOutlineHashtag,
   HiOutlineHome,
@@ -86,11 +86,12 @@ const Sidebar = () => {
   const { userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const onClick = () => {
+  const logOut = () => {
     dispatch(setUser(null));
+    dispatch(setUserID(null));
     navigate(`/login`);
   };
-  console.log(userInfo);
+  // console.log(userInfo);
   return (
     <>
       <div className="bg-[#000000] md:flex hidden flex-col w-[240px] py-10 px-4 ">
@@ -100,7 +101,7 @@ const Sidebar = () => {
           <div>
             <div
               className="flex flex-row justify-start items-center text-sm font-medium text-gray-400 hover:text-green-500 my-8 cursor-pointer"
-              onClick={onClick}
+              onClick={logOut}
             >
               <RiLogoutCircleLine className="w-6 h-6 mr-2" />
               <div>Log-Out</div>
@@ -159,7 +160,7 @@ const Sidebar = () => {
           <div>
             <div
               className="flex flex-row justify-start items-center text-sm font-medium text-gray-400 hover:text-green-500 pb-4"
-              onClick={onClick}
+              onClick={logOut}
             >
               <RiLogoutCircleLine className="w-6 h-6 mr-2" />
               <div>Log-Out</div>

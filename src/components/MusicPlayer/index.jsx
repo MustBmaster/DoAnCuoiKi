@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
+import axios from "axios";
 import {
   nextSong,
   prevSong,
@@ -22,11 +22,32 @@ const MusicPlayer = () => {
   const [repeat, setRepeat] = useState(false);
   const [shuffle, setShuffle] = useState(false);
   const dispatch = useDispatch();
-  console.log(activeSong);
   useEffect(() => {
     if (currentSongs.length) dispatch(playPause(true));
   }, [currentIndex]);
-
+  useEffect(() => {
+    const UID = localStorage.getItem("UID");
+    console.log("UID: ", UID);
+    if (UID) {
+      const listened = {
+        key: activeSong.key,
+        name: activeSong.title,
+        artist: activeSong.subtitle,
+        image: activeSong.images?.coverart,
+        last_listen: new Date(),
+        user_id: UID,
+      };
+      console.log("listened", listened);
+      axios
+        .post("http://localhost:9000/api/history", listened)
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  }, [activeSong]);
   const handlePlayPause = () => {
     if (!isActive) return;
 

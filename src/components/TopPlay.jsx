@@ -84,8 +84,28 @@ const TopPlay = () => {
   const handlePlayClick = (song, i) => {
     dispatch(setActiveSong({ song, data, i }));
     dispatch(playPause(true));
+    if (UID) {
+      const listened = {
+        key: song.key,
+        name: song.title,
+        artist: song.subtitle,
+        image: song.images?.coverart,
+        last_listen: new Date(),
+        user_id: UID,
+      };
+      console.log("listened", listened);
+      // axios
+      //   .post("http://localhost:9000/api/history", user)
+      //   .then(function (response) {
+      //     console.log(response);
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error);
+      //     message.error("Error", 5);
+      //   });
+    }
   };
-  console.log(data);
+  // console.log(data);
   return (
     <div
       ref={divRef}

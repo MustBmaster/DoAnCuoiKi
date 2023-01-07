@@ -12,12 +12,11 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { setUser } from "../redux/features/userSlice";
 const UserProfile = () => {
-  const { userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const UID = localStorage.getItem("UID");
   const navigate = useNavigate();
-  console.log(userInfo);
-
   const dateFormat = (value) => {
     const validDate = new Date(value);
     var dd = String(validDate.getDate()).padStart(2, "0");
@@ -25,7 +24,8 @@ const UserProfile = () => {
     var yyyy = validDate.getFullYear();
     return yyyy + "-" + mm + "-" + dd;
   };
-
+  const { userInfo } = useSelector((state) => state.user);
+  console.log(userInfo);
   const onFinish = (values) => {
     const payload = {
       full_name: values.fullname,
@@ -34,7 +34,7 @@ const UserProfile = () => {
     };
     console.log(payload);
     axios
-      .put("http://localhost:9000/api/account/" + userInfo._id, payload)
+      .put("http://localhost:9000/api/account/" + UID, payload)
       .then(function (response) {
         console.log(response);
         if (response.data.StatusCode == 200) {

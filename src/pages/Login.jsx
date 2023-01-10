@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Button, Checkbox, Form, Input, message } from "antd";
-import { setUser, setUserID } from "../redux/features/userSlice";
+import {
+  setUser,
+  setUserID,
+  setUserFavorite,
+} from "../redux/features/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -23,6 +27,18 @@ const Login = () => {
           dispatch(setUser(response.data.Data.UserInfo));
           dispatch(setUserID(response.data.Data.UserInfo._id));
           navigate(`/discover`);
+          axios
+            .get(
+              "http://localhost:9000/api/likedSong/" +
+                response.data.Data.UserInfo._id
+            )
+            .then(function (response) {
+              dispatch(setUserFavorite(response.data.Data));
+              console.log(list);
+            })
+            .catch(function (err) {
+              console.log(err);
+            });
         } else {
           message.error("Login failed, check your username or password", 5);
         }

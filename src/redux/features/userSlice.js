@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   UID: localStorage.getItem("UID"),
   userInfo: JSON.parse(localStorage.getItem("userInfo")),
+  likedSongList: [],
 };
 
 const userSlice = createSlice({
@@ -15,11 +16,18 @@ const userSlice = createSlice({
     },
     setUserID: (state, action) => {
       state.UID = action.payload;
-      localStorage.setItem("UID", state.UID);
+      if (action.payload == null) {
+        localStorage.removeItem("UID");
+      } else {
+        localStorage.setItem("UID", state.UID);
+      }
+    },
+    setUserFavorite: (state, action) => {
+      state.likedSongList = action.payload;
     },
   },
 });
 
-export const { setUser, setUserID } = userSlice.actions;
+export const { setUser, setUserID, setUserFavorite } = userSlice.actions;
 
 export default userSlice.reducer;

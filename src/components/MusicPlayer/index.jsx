@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { message } from "antd";
 import axios from "axios";
 import {
   nextSong,
@@ -21,22 +22,25 @@ const MusicPlayer = () => {
   const [volume, setVolume] = useState(0.5);
   const [repeat, setRepeat] = useState(false);
   const [shuffle, setShuffle] = useState(false);
+  const [liked, setLiked] = useState(false);
+  const { likedSongList, UID } = useSelector((state) => state.user);
+  // console.log(likedSongList);
   const dispatch = useDispatch();
   useEffect(() => {
     if (currentSongs.length) dispatch(playPause(true));
   }, [currentIndex]);
   useEffect(() => {
-    const UID = localStorage.getItem("UID");
-    console.log("UID: ", UID);
+    // const UID = localStorage.getItem("UID");
+    // console.log("UID: ", UID);
+    const listened = {
+      key: activeSong.key,
+      name: activeSong.title,
+      artist: activeSong.subtitle,
+      image: activeSong.images?.coverart,
+      last_listen: new Date(),
+      user_id: UID,
+    };
     if (UID) {
-      const listened = {
-        key: activeSong.key,
-        name: activeSong.title,
-        artist: activeSong.subtitle,
-        image: activeSong.images?.coverart,
-        last_listen: new Date(),
-        user_id: UID,
-      };
       console.log("listened", listened);
       axios
         .post("http://localhost:9000/api/history", listened)
@@ -58,6 +62,33 @@ const MusicPlayer = () => {
     }
   };
 
+  const likeSong = () => {
+    const likedSong = {
+      key: activeSong.key,
+      name: activeSong.title,
+      artist: activeSong.subtitle,
+      image: activeSong.images?.coverart,
+      user_id: UID,
+    };
+    if (!UID) {
+      message.info("You need to login first");
+    } else {
+      setLiked(!liked);
+      if (liked) {
+        message.info("Remove from favorites");
+      } else {
+        axios
+          .post("http://localhost:9000/api/likedSong", likedSong)
+          .then(function (response) {
+            console.log(response);
+            message.info("Add to favorites");
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+    }
+  };
   const handleNextSong = () => {
     dispatch(playPause(false));
 
@@ -84,7 +115,9 @@ const MusicPlayer = () => {
         isPlaying={isPlaying}
         isActive={isActive}
         activeSong={activeSong}
+        likeSong={likeSong}
       />
+
       <div className="flex-1 flex flex-col items-center justify-center">
         <Controls
           isPlaying={isPlaying}

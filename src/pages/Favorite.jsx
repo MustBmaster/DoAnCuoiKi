@@ -1,31 +1,28 @@
 import React from "react";
-import { Table } from "antd";
+import { Table, Image } from "antd";
+import { useSelector } from "react-redux";
 const columns = [
+  {
+    title: "Image",
+    dataIndex: "image",
+    width: 150,
+    render: (src) => <Image width={100} height={100} src={src} />,
+  },
   {
     title: "Name",
     dataIndex: "name",
     width: 150,
   },
   {
-    title: "Age",
-    dataIndex: "age",
+    title: "Artist",
+    dataIndex: "artist",
     width: 150,
   },
-  {
-    title: "Address",
-    dataIndex: "address",
-  },
 ];
-const data = [];
-for (let i = 0; i < 100; i++) {
-  data.push({
-    key: i,
-    name: `Edward King ${i}`,
-    age: 32,
-    address: `London, Park Lane no. ${i}`,
-  });
-}
+
 const Favorite = () => {
+  const { likedSongList } = useSelector((state) => state.user);
+  const data = likedSongList;
   return (
     <div>
       <h2 className="font-bold text-3xl text-white text-left">Favorite</h2>

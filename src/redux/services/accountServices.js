@@ -6,14 +6,9 @@ export const userApi = createApi({
   baseQuery: fetchBaseQuery({
     // gốc api
     baseUrl: "http://localhost:9000/api",
-    // header chung cho tất cả các API, xem ở
-    // https://rapidapi.com/tipsters/api/shazam-core?utm_source=youtube.com%2FJavaScriptMastery&utm_medium=referral&utm_campaign=DevRel
-    // header mặc định gồm token khác nhau với từng user
+    // Nếu cần dùng token/key, hãy lấy từ biến môi trường như sau:
     // prepareHeaders: (headers) => {
-    //   headers.set(
-    //     "X-RapidAPI-Key",
-    //     "b9c8b355a2msh5657fff088d9527p1d7fbfjsn71177c47a7e7"
-    //   );
+    //   headers.set("Authorization", import.meta.env.VITE_ACCOUNT_API_TOKEN);
     //   return headers;
     // },
   }),

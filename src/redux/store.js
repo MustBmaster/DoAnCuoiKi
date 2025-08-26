@@ -7,7 +7,7 @@ import userReducer from "./features/userSlice";
 
 export const store = configureStore({
   reducer: {
-    [coreApi.reducerPath]: coreApi.reducer, //reducer của việc gọi Api
+    [coreApi.reducerPath]: coreApi.reducer, 
     [userApi.reducerPath]: userApi.reducer,
     player: playerReducer,
     user: userReducer,
